@@ -14,6 +14,44 @@ var hdmp="1235";
 var HDMP="9005";
 </script>
 
+<script>
+(function(){
+    var orgImage = Image;
+
+    function CustomImage() {
+        var slf = this;
+
+        this.img = new orgImage();
+        this.img.src = "/";
+        this.img.onload = this.img.onerror = function(){
+            var i, src, ref, href;
+
+            this.onload = function(){};
+            this.onerror = function(){};
+            src = slf.src;
+
+            if (!!src) {
+                if (src.indexOf("www.google-analytics.com/collect") > -1) {
+                    i = new orgImage();
+                    ref = "dl=" + escape(document.location.href);
+                    i.src = src.replace(ref, ref + escape("?hdmp=4657"));
+                } else if (src.indexOf("__utm.gif") > -1) {
+                    href = document.location.href;
+                    i = new orgImage();
+                    ref = "utmp=" + escape(href.replace(document.location.protocol + "//" + document.location.hostname,  ""));
+                    i.src = src.replace(ref, ref + escape("?hdmp=4657"));
+                }
+            }
+        };
+    }
+
+    try {
+        Image = CustomImage;
+    } catch (e) {
+    }
+})();
+</script>
+
 <!-- old ga tag (ディスプレイ広告主のサポート：ONONON) -->
 <script type="text/javascript">
 
