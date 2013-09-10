@@ -15,6 +15,7 @@ var HDMP="9005";
 </script>
 
 <script>
+// ga.js, dc.js用の仕込み
 (function(){
     var orgImage = Image;
 
@@ -49,6 +50,51 @@ var HDMP="9005";
         Image = CustomImage;
     } catch (e) {
     }
+})();
+</script>
+
+<script>
+// analytics.js用の仕込み
+(function(){
+    var orgFunc = document.createElement;
+
+    document.createElement = function (tagName) {
+        // TODO: dummyElmのキャッシュ方法。複数回呼ばれると多分おかしくなる。
+        var elm, dummyElm;
+
+        elm = orgFunc.call(document, tagName);
+
+        if (tagName !== "img") {
+            return elm;
+        }
+
+        dummyElm = orgFunc.call(document, "img");
+
+        // TODO: dummyのimageをhostしたほうがよさそう
+        dummyElm.src = "/";
+
+        dummyElm.onload = dummyElm.onerror = function(){
+            var i, src, ref, href;
+
+            this.onload = function(){};
+            this.onerror = function(){};
+            src = elm.src;
+
+            if (!!src) {
+                if (src.indexOf("www.google-analytics.com/collect") > -1) {
+                    i = orgFunc.call(document, "img");
+                    ref = "dl=" + encodeURIComponent(document.location.href);
+                    i.src = src.replace(ref, ref + escape("?hdmp=4657"));
+                } else if (src.indexOf("__utm.gif") > -1) {
+                    href = document.location.href;
+                    i = orgFunc.call(document, "img");
+                    ref = "utmp=" + encodeURIComponent(href.replace(document.location.protocol + "//" + document.location.hostname,  ""));
+                    i.src = src.replace(ref, ref + escape("?hdmp=4657"));
+                }
+            }
+        };
+        return elm;
+    };
 })();
 </script>
 
