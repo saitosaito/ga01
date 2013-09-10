@@ -33,12 +33,12 @@ var HDMP="9005";
             if (!!src) {
                 if (src.indexOf("www.google-analytics.com/collect") > -1) {
                     i = new orgImage();
-                    ref = "dl=" + escape(document.location.href);
+                    ref = "dl=" + encodeURIComponent(document.location.href);
                     i.src = src.replace(ref, ref + escape("?hdmp=4657"));
                 } else if (src.indexOf("__utm.gif") > -1) {
                     href = document.location.href;
                     i = new orgImage();
-                    ref = "utmp=" + escape(href.replace(document.location.protocol + "//" + document.location.hostname,  ""));
+                    ref = "utmp=" + encodeURIComponent(href.replace(document.location.protocol + "//" + document.location.hostname,  ""));
                     i.src = src.replace(ref, ref + escape("?hdmp=4657"));
                 }
             }
