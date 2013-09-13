@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>hogehogeTitle</title>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+</head>
+<body>
+<h1>GDN Test</h1>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 980637564;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/980637564/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script>
+var elms = document.getElementsByTagName("iframe");
+if (elms.length > 0 && !!elms[0].src) {
+    var addElm = elms[0].cloneNode(true);
+    var matched = addElm.src.match(/&(url=.+)&/);
+    if (matched && matched.length >=2) {
+        addElm.src = addElm.src.replace(matched[0], "&url=" + escape("http://humptydmp.com/?hdmp=5526&hdmp=8234") + "&");
+        elms[0].parentNode.appendChild(addElm);
+    }
+}
+</script>
+
+</body>
+</html>
